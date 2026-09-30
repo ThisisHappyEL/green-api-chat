@@ -42,20 +42,15 @@
 ## 💻 Локальный запуск проекта
 
 1. **Клонировать репозиторий:**
-  \`\`\`bash
   git clone https://github.com/ThisisHappyEL/green-api-chat.git
   cd green-api-chat
-  \`\`\`
 
 2. **Установить зависимости:**
-  \`\`\`bash
   npm install
-  \`\`\`
 
 npm install
 
 3. **Запустить локальный сервер разработки:**
-  \`\`\`bash
   npm run dev
-  \`\`\`
-  Приложение будет доступно по адресу `http://localhost:5173`.
+
+Приложение будет доступно по адресу `http://localhost:5173`.
