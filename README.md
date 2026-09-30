@@ -1,75 +1,61 @@
-# React + TypeScript + Vite
+# GREEN-API Chat (WhatsApp Integration)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Клиентское веб-приложение на React для обмена текстовыми сообщениями в **WhatsApp** через сервис **GREEN-API**. 
+Визуальный интерфейс приложения вдохновлен и разработан по прототипу веб-версии мессенджера **MAX** (`web.max.ru`), согласно требованиям тестового задания.
 
-Currently, two official plugins are available:
+🔗 **Демо онлайн:** [https://thisishappyel.github.io/green-api-chat/](https://thisishappyel.github.io/green-api-chat/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🛠 Стек технологий
+- **React 18** (Vite)
+- **TypeScript** (строгая типизация компонентов и API-ответов)
+- **Tailwind CSS** (стилизация интерфейса под прототип MAX)
+- **GREEN-API HTTP API** (интеграция с WhatsApp)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Реализованный функционал
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Авторизация в GREEN-API:**
+   - Ввод учетных данных инстанса (`idInstance`, `apiTokenInstance`).
+   - Сохранение сессии в `localStorage` (автоматический вход при перезагрузке страницы и кнопка безопасного выхода со сбросом ключей).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Работа с диалогами:**
+   - Создание нового чата по номеру телефона получателя (с автоматической очисткой спецсимволов и форматированием в формат `@c.us`).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. **Отправка сообщений:**
+   - Отправка текстовых сообщений адресату в WhatsApp методом `SendMessage`.
+   - Мгновенное отображение отправленных сообщений в чате.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. **Получение входящих сообщений (Long Polling):**
+   - Получение новых сообщений из очереди в реальном времени методом `ReceiveNotification`.
+   - Обязательное подтверждение и удаление обработанных сообщений из очереди методом `DeleteNotification` во избежание дублирования.
+   - Фильтрация входящих текстовых событий (`incomingMessageReceived`, `outgoingMessageReceived`).
 
-```
+5. **UX/UI:**
+   - Автоматический скролл к последнему сообщению в чате.
+   - Адаптивные пузыри сообщений (исходящие справа, входящие слева с временными метками).
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 💻 Локальный запуск проекта
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Клонировать репозиторий:**
+  \`\`\`bash
+  git clone https://github.com/ThisisHappyEL/green-api-chat.git
+  cd green-api-chat
+  \`\`\`
 
-```
+2. **Установить зависимости:**
+  \`\`\`bash
+  npm install
+  \`\`\`
+
+npm install
+
+3. **Запустить локальный сервер разработки:**
+  \`\`\`bash
+  npm run dev
+  \`\`\`
+  Приложение будет доступно по адресу `http://localhost:5173`.
